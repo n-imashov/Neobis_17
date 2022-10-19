@@ -1,8 +1,33 @@
 from rest_framework import serializers
-from .models import Recipe, Contact, Branch
+from .models import Recipe, Contact, Branch, Category
+
+
+class CategorySerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = 'name'
+
+
+class BranchSerializer(serializers.ModelSerializer):
+    course = serializers.Serializer(required=False)
+
+    class Meta:
+        model = Branch
+        fields = ('longitude', 'address')
+
+
+class ContactSerializer(serializers.ModelSerializer):
+    course = serializers.Serializer(required=False)
+
+    class Meta:
+        model = Contact
+        fields = ('id', 'email')
 
 
 class RecipeSerializer(serializers.ModelSerializer):
+    contacts = ContactSerializer(many=True)
+    branches = BranchSerializer(many=True)
+
     class Meta:
         model = Recipe
         fields = ('title', 'category')

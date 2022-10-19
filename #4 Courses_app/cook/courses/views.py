@@ -1,20 +1,36 @@
-from django.forms import model_to_dict
-from .models import Recipe
+from rest_framework import viewsets, generics, status
+from .models import Recipe, Branch, Contact
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from .serializers import RecipeSerializer
+from .serializers import RecipeSerializer, BranchSerializer, ContactSerializer, CategorySerializers
 
 
 class RecipeAPIView(APIView):
     def get(self, request):
-        w = Recipe.objects.all()
-        return Response({'posts': RecipeSerializer(w, many=True).data})
+        category = Recipe.objects.all()
+        serializer = RecipeSerializer(category, many=True)
+        return Response({'posts': RecipeSerializer(category, many=True).data})
+
+
+class BranchView(generics.ListCreateAPIView):
+    queryset = Branch.objects.all()
+    serializer_class = BranchSerializer
+
+
+class ContactViewSet(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+
+
+class RecipeListView(APIView):
+    def get(self, request,  *args, **kwargs):
+        course = Recipe.objects.all()
+        serializer = RecipeSerializer(course, many=True)
+        return Response(serializer.data)
 
     def post(self, request):
-        post_new = Recipe.objects.create(
-            title=request.data['title'],
-            content=request.data['content'],
-            category_id=request.data['category_id']
-        )
-        return Response({'post': model_to_dict(post_new)})
+        serializer = RecipeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
