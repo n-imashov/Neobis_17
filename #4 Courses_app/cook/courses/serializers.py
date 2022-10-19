@@ -1,38 +1,29 @@
 from rest_framework import serializers
-from rest_framework.renderers import JSONRenderer
-
-from .models import Recipe
+from .models import Recipe, Contact, Branch
 
 
+class RecipeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recipe
+        fields = ('title', 'category')
 
-class RecipeSerializer(serializers.Serializer):
-    title = serializers.CharField(max_length=250)
-    serves = serializers.CharField(max_length=50)
-    prep_time = serializers.IntegerField(default=0)
-    cook_time = serializers.IntegerField(default=0)
-    ingredients = serializers.CharField()
-    preparation = serializers.CharField()
-    category = serializers.ImageField()
+    def create(self, validate_data):
+        print(validate_data)
+        contacts = validate_data.pop('contacts')
+        branches = validate_data.pop('branches')
+        courses = Contact.objects.create(**validate_data)
+        for contact in contacts:
+            Contact.objects.create(type=contact.get('type', ''),
+                                   courses=courses,
+                                   value=contact.get('value', '')
+                                   )
 
+        for branch in branches:
+            Branch.objects.create(
+                courses=courses,
+                longitude=branch.get('longitude', ''),
+                latitude=branch.get('latitude', ''),
+                address=branch.get('address', '')
+            )
 
-
-
-
-
-#class RecipeModel:
-#    def __int__(self, title, content):
-#        self.title = title
-#        self.content = content
-#
-
-
-#def encode():
-#    model = RecipeModel()
-#    model_sr = RecipeSerializer(model)
-#    print(model_sr.data, type(model_sr.data), sep='\n')
-#    json = JSONRenderer().render(model_sr.data)
-#    print(json)
-#
-#
-#def decode():
-#    stream = io.BytesIO()
+        return courses

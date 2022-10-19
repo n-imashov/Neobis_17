@@ -19,6 +19,18 @@ class Recipe(models.Model):
         return self.title
 
 
+class Branch(models.Model):
+    latitude = models.CharField(max_length=100),
+    longitude = models.CharField(max_length=100),
+    address = models.CharField(max_length=100)
+
+
+class Contact(models.Model):
+    type = models.IntegerField(),
+    email = models.EmailField()
+    value = models.CharField(max_length=100)
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True)
 
