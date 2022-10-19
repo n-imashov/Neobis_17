@@ -11,7 +11,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         print(validate_data)
         contacts = validate_data.pop('contacts')
         branches = validate_data.pop('branches')
-        courses = Contact.objects.create(**validate_data)
+        courses = Recipe.objects.create(**validate_data)
         for contact in contacts:
             Contact.objects.create(type=contact.get('type', ''),
                                    courses=courses,

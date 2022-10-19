@@ -1,4 +1,5 @@
 from django.db import models
+import courses
 
 
 class Recipe(models.Model):
@@ -23,12 +24,14 @@ class Branch(models.Model):
     latitude = models.CharField(max_length=100),
     longitude = models.CharField(max_length=100),
     address = models.CharField(max_length=100)
+    course = models.ForeignKey(Recipe)
 
 
 class Contact(models.Model):
     type = models.IntegerField(),
     email = models.EmailField()
     value = models.CharField(max_length=100)
+    course = models.ForeignKey(Recipe)
 
 
 class Category(models.Model):
