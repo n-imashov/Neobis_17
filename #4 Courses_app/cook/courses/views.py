@@ -1,25 +1,10 @@
-from rest_framework import viewsets, generics, status
-from .models import Recipe, Branch, Contact
+from rest_framework import viewsets, status
+from rest_framework.generics import ListAPIView
+
+from .models import Recipe, Branch, Contact, Category
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import RecipeSerializer, BranchSerializer, ContactSerializer, CategorySerializers
-
-
-class RecipeAPIView(APIView):
-    def get(self, request):
-        category = Recipe.objects.all()
-        serializer = RecipeSerializer(category, many=True)
-        return Response({'posts': RecipeSerializer(category, many=True).data})
-
-
-class BranchView(generics.ListCreateAPIView):
-    queryset = Branch.objects.all()
-    serializer_class = BranchSerializer
-
-
-class ContactViewSet(viewsets.ModelViewSet):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
 
 
 class RecipeListView(APIView):
@@ -34,3 +19,20 @@ class RecipeListView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
+
+
+class CategoryView(APIView):
+    def get(self, request):
+        category = Category.objects.all()
+        serializer = CategorySerializers(category, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class BranchView(ListAPIView):
+    queryset = Branch.objects.all()
+    serializer_class = BranchSerializer
+
+
+class ContactViewSet(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer

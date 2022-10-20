@@ -1,6 +1,13 @@
 from django.db import models
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100, db_index=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Recipe(models.Model):
     title = models.CharField(max_length=100)
     serves = models.CharField(max_length=50)
@@ -9,9 +16,9 @@ class Recipe(models.Model):
     ingredients = models.TextField()
     preparation = models.TextField()
     category = models.ForeignKey(
-        'Category',
+        Category,
         related_name='recipe',
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=True
     )
 
@@ -24,25 +31,22 @@ class Branch(models.Model):
     longitude = models.CharField(max_length=100),
     address = models.CharField(max_length=100)
     course = models.ForeignKey(
-        'Recipe',
+        Recipe,
         on_delete=models.CASCADE,
-        null=True
+        related_name='branches'
         )
 
 
 class Contact(models.Model):
-    type = models.IntegerField(),
-    email = models.EmailField()
-    value = models.CharField(max_length=100)
-    course = models.ForeignKey(
-        'Recipe',
-        on_delete=models.CASCADE,
-        null=True
-        )
 
+    class Type(models.IntegerChoices):
+        PHONE = 1,
+        FACEBOOK = 2,
+        EMAIL = 3
 
-class Category(models.Model):
-    name = models.CharField(max_length=100, db_index=True)
+    type = models.IntegerField(choices=Type.choices)
+    value = models.CharField(max_length=250)
+    course = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='contacts')
 
     def __str__(self):
-        return self.name
+        return self.value
