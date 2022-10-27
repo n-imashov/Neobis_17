@@ -1,10 +1,8 @@
 from rest_framework import serializers
-
-from courses.models import Category, Branch, Contact, Recipe
+from .models import Category, Branch, Contact, Course
 
 
 class CategorySerializers(serializers.ModelSerializer):
-
     class Meta:
         model = Category
         fields = '__all__'
@@ -26,20 +24,20 @@ class ContactSerializer(serializers.ModelSerializer):
         fields = ('id', 'type', 'value', 'course', )
 
 
-class RecipeSerializer(serializers.ModelSerializer):
+class CourseSerializer(serializers.ModelSerializer):
     contacts = ContactSerializer(many=True)
     branches = BranchSerializer(many=True)
 
     class Meta:
-        model = Recipe
-        fields = ['title', 'category']
+        model = Course
+        fields = ['id', 'name', 'description', 'category', 'logo', 'category', 'contacts', 'branches']
 
     def create(self, validate_data):
         print(validate_data)
         contacts = validate_data.pop('contacts')
         branches = validate_data.pop('branches')
 
-        course = Recipe.objects.create(**validate_data)
+        course = Course.objects.create(**validate_data)
         for contact in contacts:
             Contact.objects.create(type=contact.get('type', ''), course=course, value=contact.get('value', ''))
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Recipe, Branch, Contact, Category
+from .models import Category, Branch, Contact, Course
 
 
 class ContactInline(admin.TabularInline):
@@ -8,11 +8,12 @@ class ContactInline(admin.TabularInline):
     extra = 3
 
 
-@admin.register(Recipe)
+@admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     inlines = [ContactInline]
 
 
+admin.site.register(Category)
 admin.site.register(Branch)
 admin.site.register(Contact)
-admin.site.register(Category)
+# admin.site.register(Course)

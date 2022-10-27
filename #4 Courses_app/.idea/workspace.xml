@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="404d1b51-1b23-4fa8-8987-b0b1140de4e3" name="Changes" comment="" />
+    <list default="true" id="dd6cbdb9-9056-4810-ae27-d4a53b8a8af8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,7 +17,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2GIXhgaOpUyVPIacuX30X6XbDdg" />
+  <component name="ProjectId" id="2GdLwEvOBYDXli695jAdTpAGEg0" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -26,13 +26,18 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/Нурген/NEOBIS/drf-task-drf_task",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "last_opened_file_path": "E:/Нурген/NEOBIS/1"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Нурген\NEOBIS\1\cook" />
+      <recent name="E:\Нурген\NEOBIS\1\cook\config" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="courses_app" />
+      <module name="1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -56,11 +61,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="404d1b51-1b23-4fa8-8987-b0b1140de4e3" name="Changes" comment="" />
-      <created>1666077192908</created>
+      <changelist id="dd6cbdb9-9056-4810-ae27-d4a53b8a8af8" name="Changes" comment="" />
+      <created>1666713750997</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1666077192908</updated>
+      <updated>1666713750997</updated>
     </task>
     <servers />
   </component>
