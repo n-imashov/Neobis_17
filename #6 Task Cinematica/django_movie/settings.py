@@ -11,9 +11,17 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from pathlib import Path
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
+SECRET_KEY = 'django-insecure-j&)h9anf%!o3fmrdu8tydve$-$o4p+$6z1mn$tj!7&a14%yu#u'
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Application definition
 
@@ -211,8 +219,3 @@ RECAPTCHA_SCORE_THRESHOLD = 0.5
 
 SITE_ID = 1
 
-
-try:
-    from .local_settings import *
-except ImportError:
-    from .prod_settings import *
