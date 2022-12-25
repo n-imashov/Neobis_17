@@ -1,19 +1,5 @@
 from django.urls import path
-
-from .views import (
-    CinemasView,
-    CinemasDetailView,
-    MovieView,
-    MovieDetailView,
-    ShowTimeView,
-    ShowTimeDetailView,
-    RoomsView,
-    RoomsDetailView,
-    RoomsFormatView,
-    RoomsFormatDetailView,
-    MovieFormatView,
-    MovieFormatDetailView,
-)
+from .views import *
 
 
 urlpatterns = [

@@ -1,15 +1,7 @@
 import datetime
 import pytz
-from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from .models import (
-    Cinemas,
-    Movie,
-    ShowTime,
-    Rooms,
-    RoomsFormat,
-    MovieFormat,
-)
+from .models import *
 
 utc = pytz.UTC
 
@@ -27,7 +19,6 @@ class MovieFormatSerializer(serializers.ModelSerializer):
 
 
 class MovieSerializer(serializers.ModelSerializer):
-
     movie_status = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -43,9 +34,7 @@ class MovieSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_movie_status(obj):
-
         now = datetime.date.today()
-
         if obj.beginning_of_movie <= now <= obj.ending_of_movie:
             obj.movie_status = 'current'
             return obj.movie_status
@@ -56,7 +45,6 @@ class MovieSerializer(serializers.ModelSerializer):
 
 
 class ShowTimeSerializer(serializers.ModelSerializer):
-
     is_active = serializers.SerializerMethodField()
 
     class Meta:

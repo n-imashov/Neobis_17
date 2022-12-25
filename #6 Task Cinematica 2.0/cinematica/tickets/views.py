@@ -1,26 +1,7 @@
 from rest_framework import generics
-
-from users.permissions import (
-    IsAdminOrReadOnly,
-)
-from .serializers import (
-    TicketSerializer,
-    OrdersSerializer,
-    FeedbackSerializer,
-    BookingSerializer,
-    SeatsSerializer,
-    ClubCardSerializer,
-    TicketTypeSerializer,
-)
-from .models import (
-    Tickets,
-    Orders,
-    Feedback,
-    Booking,
-    Seats,
-    ClubCard,
-    TicketType,
-)
+from users.permissions import IsAdminOrReadOnly
+from .serializers import *
+from .models import *
 
 
 class TicketsView(generics.ListCreateAPIView):
@@ -75,16 +56,6 @@ class SeatsDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SeatsSerializer
     permission_classes = [IsAdminOrReadOnly, ]
     queryset = Seats.objects.all()
-
-
-class TicketTypeView(generics.ListCreateAPIView):
-    serializer_class = TicketTypeSerializer
-    queryset = TicketType.objects.all()
-
-
-class TicketTypeDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = TicketTypeSerializer
-    queryset = TicketType.objects.all()
 
 
 class ClubCardView(generics.ListCreateAPIView):

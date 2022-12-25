@@ -1,21 +1,7 @@
 import datetime
 from rest_framework import generics
-from .serializers import (
-    CinemasSerializer,
-    MovieSerializer,
-    ShowTimeSerializer,
-    RoomsSerializer,
-    RoomsFormatSerializer,
-    MovieFormatSerializer
-)
-from .models import (
-    Cinemas,
-    Movie,
-    ShowTime,
-    Rooms,
-    RoomsFormat,
-    MovieFormat,
-)
+from .serializers import *
+from .models import *
 from users.permissions import IsAdminOrReadOnly
 
 

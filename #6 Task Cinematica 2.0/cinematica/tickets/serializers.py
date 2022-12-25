@@ -7,17 +7,16 @@ from .models import (
     Feedback,
     Seats,
     ClubCard,
-    TicketType,
 )
 
 
 class TicketSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Tickets
         fields = [
             'id',
-            'ticket_type',
             'seats',
             'user',
             'orders',
@@ -32,9 +31,7 @@ class TicketSerializer(serializers.ModelSerializer):
         seats = data.get('seats')
         show_time = data.get('show_time')
         if Booking.objects.filter(seats=seats, show_time=show_time).exists():
-
             raise serializers.ValidationError('This seat is already reserved.')
-
         return data
 
 
@@ -55,14 +52,13 @@ class OrdersSerializer(serializers.ModelSerializer):
         tickets = Tickets.objects.filter(orders=obj.id)
         total_price = 0
         for ticket in tickets:
-
-                total_price += ticket.price
-
+            total_price += ticket.price
         return total_price
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Feedback
         fields = [
@@ -76,6 +72,7 @@ class FeedbackSerializer(serializers.ModelSerializer):
 
 class BookingSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Booking
         fields = [
@@ -89,9 +86,7 @@ class BookingSerializer(serializers.ModelSerializer):
         seats = data.get('seats')
         show_time = data.get('show_time')
         if Booking.objects.filter(seats=seats, show_time=show_time).exists():
-
             raise serializers.ValidationError('This seat is already reserved.')
-
         return data
 
 
@@ -132,13 +127,3 @@ class ClubCardSerializer(serializers.ModelSerializer):
             obj.discount = 7
         obj.save()
         return balance
-
-
-class TicketTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TicketType
-        fields = [
-            'id',
-            'name',
-            'price',
-        ]

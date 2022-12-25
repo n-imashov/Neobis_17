@@ -1,21 +1,5 @@
 from django.urls import path
-
-from .views import (
-    TicketsView,
-    TicketsDetailView,
-    OrdersView,
-    OrdersDetailView,
-    FeedbackView,
-    FeedbackDetailView,
-    BookingView,
-    BookingDetailView,
-    SeatsView,
-    SeatsDetailView,
-    TicketTypeView,
-    TicketTypeDetailView,
-    ClubCardView,
-    ClubCardDetailView,
-)
+from .views import *
 
 
 urlpatterns = [
@@ -29,8 +13,6 @@ urlpatterns = [
     path('bookings/<int:pk>', BookingDetailView.as_view()),
     path('seats', SeatsView.as_view()),
     path('seats/<int:pk>', SeatsDetailView.as_view()),
-    path('type', TicketTypeView.as_view()),
-    path('type/<int:pk>', TicketTypeDetailView.as_view()),
     path('club-card', ClubCardView.as_view()),
     path('club-card/<int:pk>', ClubCardDetailView.as_view()),
 ]
